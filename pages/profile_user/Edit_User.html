@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#2563EB',
+                        'primary-red': '#DC2626'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom dropdown arrow */
+        .custom-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        
+        /* Remove default arrow */
+        .custom-select::-ms-expand {
+            display: none;
+        }
+        
+        /* Custom scrollbar for webkit browsers */
+        .custom-select::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+        <!-- Title -->
+        <div class="text-center">
+            <h2 class="text-3xl font-semibold text-gray-900">Edit User</h2>
+        </div>
+
+        <!-- Form -->
+        <form class="space-y-6">
+            <!-- User Status Field -->
+            <div>
+                <label for="userStatus" class="block text-sm font-semibold text-gray-900 mb-2">
+                    User Status
+                </label>
+                <select 
+                    id="userStatus" 
+                    name="userStatus"
+                    class="custom-select w-full px-4 py-3 border border-gray-300 rounded-xl appearance-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 bg-white text-gray-900 placeholder-gray-500 text-base font-medium shadow-sm"
+                >
+                    <option selected value="">Activate/Deactivate</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+
+            <!-- Role Field -->
+            <div>
+                <label for="role" class="block text-sm font-semibold text-gray-900 mb-2">
+                    Role
+                </label>
+                <select 
+                    id="role" 
+                    name="role"
+                    class="custom-select w-full px-4 py-3 border border-gray-300 rounded-xl appearance-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 bg-white text-gray-400 placeholder-gray-500 text-base font-medium shadow-sm"
+                >
+                    <option selected value="">Users/Admin</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex items-center justify-end space-x-3 pt-6">
+                <button
+                    type="button"
+                    class="group relative w-full sm:w-auto flex justify-center py-3 px-6 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-500/25 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                    <span class="flex items-center">Cancel</span>
+                </button>
+                <button
+                    type="submit"
+                    class="group relative w-full sm:w-auto flex justify-center py-3 px-6 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/25 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                    <span class="flex items-center">Done</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Add interactivity for dropdowns
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', function() {
+                this.classList.remove('text-gray-400');
+                this.classList.add('text-gray-900');
+            });
+
+            // Reset color on focus
+            select.addEventListener('focus', function() {
+                this.classList.remove('text-gray-400');
+                this.classList.add('text-gray-900');
+            });
+        });
+
+        // Form submission handler
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userStatus = document.getElementById('userStatus').value;
+            const role = document.getElementById('role').value;
+            
+            console.log('Form submitted:', {
+                userStatus: userStatus,
+                role: role
+            });
+            
+            // Simulate successful submission
+            alert('User updated successfully!');
+        });
+
+        // Cancel button handler
+        document.querySelector('button[type="button"]').addEventListener('click', function() {
+            if (confirm('Are you sure you want to cancel?')) {
+                // Close modal or redirect
+                window.history.back();
+            }
+        });
+    </script>
+</body>
+</html>
